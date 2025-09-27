@@ -1,5 +1,5 @@
 import axiosInstance from "@/config/axiosInstance.config";
-import type { IFetchGamesResponse, IGame } from "@/interfaces/game";
+import type { IFetchGamesResponse, IGame } from "@/interfaces";
 import { CanceledError, type AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
