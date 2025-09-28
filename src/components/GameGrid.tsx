@@ -1,23 +1,18 @@
-import useGames from "@/hooks/useGames";
-import GameCard from "./GameCard";
 import { Center, SimpleGrid } from "@chakra-ui/react";
-import GameGridSkeleton from "./GameGridSkeleton";
-import EmptyGamesState from "./EmptyGamesState";
+import type { ReactNode } from "react";
 
-const GameGrid = () => {
-	const { error, isLoading, games } = useGames();
-	if (error) return <div>Error: {error.message}</div>;
-	if (isLoading) return <GameGridSkeleton />;
-	if (!games || (games && games.length === 0)) return <EmptyGamesState />;
+interface Iprops {
+	children: ReactNode;
+}
+
+const GameGrid = ({ children }: Iprops) => {
 	return (
 		<Center>
 			<SimpleGrid
 				gap={{ base: 4, md: 6 }}
-				columns={{ base: 1, md: 2, lg: 3, xl: 5 }}
+				columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}
 				p={2}>
-				{games.map((game) => (
-					<GameCard key={game.id} game={game} />
-				))}
+				{children}
 			</SimpleGrid>
 		</Center>
 	);
