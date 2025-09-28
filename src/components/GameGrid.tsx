@@ -1,12 +1,14 @@
 import useGames from "@/hooks/useGames";
 import GameCard from "./GameCard";
 import { Center, SimpleGrid } from "@chakra-ui/react";
+import GameGridSkeleton from "./GameGridSkeleton";
+import EmptyGamesState from "./EmptyGamesState";
 
 const GameGrid = () => {
 	const { error, isLoading, games } = useGames();
 	if (error) return <div>Error: {error.message}</div>;
-	if (isLoading) return <div>Loading...</div>;
-	if (games && games.length === 0) return <div>No games found</div>;
+	if (isLoading) return <GameGridSkeleton />;
+	if (!games || (games && games.length === 0)) return <EmptyGamesState />;
 	return (
 		<Center>
 			<SimpleGrid

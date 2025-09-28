@@ -4,7 +4,7 @@ import { CanceledError, type AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
 const useGames = () => {
-	const [games, setGames] = useState<IGame[]>([]);
+	const [games, setGames] = useState<IGame[]>();
 	const [error, setError] = useState<AxiosError | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	useEffect(() => {
@@ -13,12 +13,18 @@ const useGames = () => {
 		setIsLoading(true);
 		axiosInstance
 			.get<IFetchGamesResponse>("/games", { signal })
-			.then((res) => setGames(res.data.results))
-			.catch((err) => {
-				if (err instanceof CanceledError) return;
-				setError(err);
+			.then((res) => {
+				setGames(res.data.results);
+				setIsLoading(false);
 			})
-			.finally(() => setIsLoading(false));
+			.catch((err) => {
+				if (err instanceof CanceledError) {
+					setIsLoading(false);
+					return;
+				}
+				setIsLoading(false);
+				setError(err);
+			});
 		return () => controller.abort();
 	}, []);
 	return { games, error, isLoading };
