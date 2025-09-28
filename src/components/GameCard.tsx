@@ -1,6 +1,7 @@
 import type { IGame } from "@/interfaces";
-import { Card, Image } from "@chakra-ui/react";
+import { Card, HStack, Image } from "@chakra-ui/react";
 import GamePlatformList from "./GamePlatformList";
+import CriticScore from "./CriticScore";
 
 interface Iprops {
 	game: IGame;
@@ -14,7 +15,10 @@ const GameCard = ({ game }: Iprops) => {
 			<Card.Body gap='2'>
 				<Card.Title>{game.name}</Card.Title>
 				<Card.Description></Card.Description>
-				<GamePlatformList platforms={gamePlatforms} />
+				<HStack justifyContent='space-between'>
+					<GamePlatformList platforms={gamePlatforms} />
+					<CriticScore score={game.metacritic} />
+				</HStack>
 			</Card.Body>
 			<Card.Footer></Card.Footer>
 		</Card.Root>
