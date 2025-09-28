@@ -10,7 +10,7 @@ const GameGrid = () => {
 	return (
 		<Center>
 			<SimpleGrid
-				gap={{ base: 2, md: 3, lg: 4 }}
+				gap={{ base: 4, md: 6 }}
 				columns={{ base: 1, md: 2, lg: 3, xl: 5 }}
 				p={2}>
 				{games.map((game) => (
