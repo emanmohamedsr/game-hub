@@ -10,8 +10,8 @@ const GameGrid = ({ children }: Iprops) => {
 		<Center>
 			<SimpleGrid
 				gap={{ base: 4, md: 6 }}
-				columns={{ base: 1, md: 2, xl: 3, "2xl": 4 }}
-				p={2}>
+				columns={{ base: 1, md: 2, lg: 3, xl: 4, "2xl": 5 }}
+				p={4}>
 				{children}
 			</SimpleGrid>
 		</Center>

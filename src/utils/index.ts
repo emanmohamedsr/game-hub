@@ -27,7 +27,7 @@ interface IGetCroppedGameTitleProps {
 
 export const getCroppedText = ({
 	title,
-	length = 20,
+	length = 15,
 }: IGetCroppedGameTitleProps) => {
 	return title.length > length ? title.slice(0, length) + "..." : title;
 };
