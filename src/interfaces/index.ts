@@ -16,3 +16,13 @@ export interface IPlatform {
 	name: string;
 	slug: string;
 }
+
+export interface IFetchGenresResponse {
+	count: number;
+	results: IGenre[];
+}
+
+export interface IGenre {
+	id: number;
+	name: string;
+}
