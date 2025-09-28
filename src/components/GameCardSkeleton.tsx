@@ -13,9 +13,6 @@ const GameCardSkeleton = () => {
 						<Skeleton height='20px' w={"10%"} />
 					</HStack>
 				</Card.Body>
-				{/* <Card.Footer>
-				<Skeleton height='20px' width='30%' />
-			</Card.Footer> */}
 			</Card.Root>
 		</GameCardContainer>
 	);

@@ -2,7 +2,7 @@ import type { IGame } from "@/interfaces";
 import { Card, HStack, Image } from "@chakra-ui/react";
 import GamePlatformList from "./GamePlatformList";
 import CriticScore from "./CriticScore";
-import { getCropedImageUrl } from "@/utils";
+import { getCroppedText, getCroppedImageUrl } from "@/utils";
 import GameCardContainer from "./GameCardContainer";
 
 interface Iprops {
@@ -16,18 +16,18 @@ const GameCard = ({ game }: Iprops) => {
 			<Card.Root>
 				<Image
 					objectFit='cover'
-					src={getCropedImageUrl({ url: game.background_image })}
+					src={getCroppedImageUrl({ url: game.background_image })}
 					alt={game.name}
 				/>
-				<Card.Body gap='2'>
-					<Card.Title>{game.name}</Card.Title>
-					<Card.Description></Card.Description>
-					<HStack justifyContent='space-between'>
+				<Card.Body gap='12px'>
+					<Card.Title fontSize={"lg"} fontWeight='bold'>
+						{getCroppedText({ title: game.name })}
+					</Card.Title>
+					<HStack justifyContent='space-between' alignItems='start'>
 						<GamePlatformList platforms={gamePlatforms} />
 						<CriticScore score={game.metacritic} />
 					</HStack>
 				</Card.Body>
-				<Card.Footer></Card.Footer>
 			</Card.Root>
 		</GameCardContainer>
 	);
