@@ -1,11 +1,11 @@
-import useGames from "@/hooks/useGames";
 import GameCard from "./GameCard";
 import EmptyGamesState from "./EmptyGamesState";
 import GameGrid from "./GameGrid";
 import GameCardSkeleton from "./GameCardSkeleton";
+import useGames from "@/hooks/useGames";
 
 const GamesList = () => {
-	const { error, isLoading, games } = useGames();
+	const { data: games, isLoading, error } = useGames();
 	if (error) return <div>Error: {error.message}</div>;
 	if (!games || (games && games.length === 0)) return <EmptyGamesState />;
 	if (isLoading) {
