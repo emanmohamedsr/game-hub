@@ -25,7 +25,7 @@ const GamesList = ({ selectedGenre }: IProps) => {
 	return (
 		<GameGrid>
 			{games.map((game) => (
-				<GameCard key={game.id} game={game} />
+				<GameCard game={game} key={game.id} />
 			))}
 		</GameGrid>
 	);
