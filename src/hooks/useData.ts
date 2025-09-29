@@ -1,5 +1,5 @@
 import axiosInstance from "@/config/axiosInstance.config";
-import { CanceledError, type AxiosError } from "axios";
+import { CanceledError, type AxiosError, type AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 
 export interface IFetchDataResponse<T> {
@@ -9,9 +9,11 @@ export interface IFetchDataResponse<T> {
 
 interface IProps {
 	endpoint: string;
+	requestConfig?: AxiosRequestConfig;
 }
 
-const useData = <T>({ endpoint }: IProps) => {
+const useData = <T>({ endpoint, requestConfig }: IProps) => {
+	const params = requestConfig?.params;
 	const [data, setData] = useState<T[]>();
 	const [error, setError] = useState<AxiosError | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,7 +22,7 @@ const useData = <T>({ endpoint }: IProps) => {
 		const signal = controller.signal;
 		setIsLoading(true);
 		axiosInstance
-			.get<IFetchDataResponse<T>>(`/${endpoint}`, { signal })
+			.get<IFetchDataResponse<T>>(`/${endpoint}`, { signal, params })
 			.then((res) => {
 				setData(res.data.results);
 				setIsLoading(false);
@@ -34,7 +36,7 @@ const useData = <T>({ endpoint }: IProps) => {
 				setError(err);
 			});
 		return () => controller.abort();
-	}, [endpoint]);
+	}, [endpoint, params]);
 	return { data, error, isLoading };
 };
 

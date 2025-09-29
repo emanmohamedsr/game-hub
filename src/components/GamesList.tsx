@@ -3,9 +3,14 @@ import EmptyGamesState from "./EmptyGamesState";
 import GameGrid from "./GameGrid";
 import GameCardSkeleton from "./GameCardSkeleton";
 import useGames from "@/hooks/useGames";
+import type { IGenre } from "@/interfaces";
 
-const GamesList = () => {
-	const { data: games, isLoading, error } = useGames();
+interface IProps {
+	selectedGenre: IGenre | null;
+}
+
+const GamesList = ({ selectedGenre }: IProps) => {
+	const { data: games, isLoading, error } = useGames({ selectedGenre });
 	if (error) return <div>Error: {error.message}</div>;
 	if (!games || (games && games.length === 0)) return <EmptyGamesState />;
 	if (isLoading) {

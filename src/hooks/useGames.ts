@@ -1,5 +1,21 @@
-import type { IGame } from "@/interfaces";
+import type { IGame, IGenre } from "@/interfaces";
 import useData from "./useData";
+import { useMemo } from "react";
 
-const useGames = () => useData<IGame>({ endpoint: "games" });
+interface IUseGamesProps {
+	selectedGenre: IGenre | null;
+}
+
+const useGames = ({ selectedGenre }: IUseGamesProps) => {
+	const params = useMemo(
+		() => ({
+			genres: selectedGenre?.id,
+		}),
+		[selectedGenre?.id],
+	);
+	return useData<IGame>({
+		endpoint: "games",
+		requestConfig: { params },
+	});
+};
 export default useGames;
