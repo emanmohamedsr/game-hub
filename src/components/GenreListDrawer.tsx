@@ -6,9 +6,14 @@ import type { IGenre } from "@/interfaces";
 interface IProps {
 	children: ReactNode;
 	setSelectedGenre: (genre: IGenre | null) => void;
+	selectedGenre: IGenre | null;
 }
 
-const GenreListDrawer = ({ children, setSelectedGenre }: IProps) => {
+const GenreListDrawer = ({
+	children,
+	setSelectedGenre,
+	selectedGenre,
+}: IProps) => {
 	return (
 		<Drawer.Root placement={"start"}>
 			<Drawer.Trigger asChild>{children}</Drawer.Trigger>
@@ -20,7 +25,10 @@ const GenreListDrawer = ({ children, setSelectedGenre }: IProps) => {
 							<Drawer.Title>Genres List</Drawer.Title>
 						</Drawer.Header>
 						<Drawer.Body>
-							<GenresList setSelectedGenre={setSelectedGenre} />
+							<GenresList
+								setSelectedGenre={setSelectedGenre}
+								selectedGenre={selectedGenre}
+							/>
 						</Drawer.Body>
 						<Drawer.CloseTrigger asChild>
 							<CloseButton size='sm' />

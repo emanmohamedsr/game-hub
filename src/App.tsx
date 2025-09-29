@@ -15,10 +15,16 @@ const App = () => {
 			}}
 			templateColumns={{ base: "1fr", lg: "200px 1fr" }}>
 			<GridItem area={"nav"}>
-				<NavBar setSelectedGenre={setSelectedGenre} />
+				<NavBar
+					setSelectedGenre={setSelectedGenre}
+					selectedGenre={selectedGenre}
+				/>
 			</GridItem>
 			<GridItem display={{ base: "none", lg: "block" }} area={"aside"} pl={2}>
-				<GenresList setSelectedGenre={setSelectedGenre} />
+				<GenresList
+					setSelectedGenre={setSelectedGenre}
+					selectedGenre={selectedGenre}
+				/>
 			</GridItem>
 			<GridItem area={"main"} px={6}>
 				<GamesList selectedGenre={selectedGenre} />

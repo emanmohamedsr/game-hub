@@ -8,11 +8,16 @@ import allGenres from "../assets/all-genres.webp";
 
 interface IProps {
 	setSelectedGenre: (genre: IGenre | null) => void;
+	selectedGenre: IGenre | null;
 }
 
-const GenresList = ({ setSelectedGenre }: IProps) => {
+const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
 	const { colorMode } = useColorMode();
 	const { data: genres, isLoading, error } = useGenres();
+
+	const isActive = (genre: IGenre | null) =>
+		selectedGenre?.id === genre?.id ||
+		(selectedGenre === null && genre === null);
 
 	const handleGenreSelection = (genre: IGenre | null) => {
 		setSelectedGenre(genre);
@@ -28,6 +33,13 @@ const GenresList = ({ setSelectedGenre }: IProps) => {
 
 			{!isLoading && genres && genres.length > 0 && (
 				<HStack
+					bgGradient={
+						isActive(null)
+							? colorMode === "light"
+								? "linear-gradient(to right, #fbb6ce, #d6bcfa)"
+								: "linear-gradient(to right, #97266d, #6b46c1)"
+							: undefined
+					}
 					onClick={() => handleGenreSelection(null)}
 					w={"100%"}
 					borderRadius={"md"}
@@ -52,6 +64,13 @@ const GenresList = ({ setSelectedGenre }: IProps) => {
 			{genres && genres.length > 0 ? (
 				genres?.map((genre) => (
 					<HStack
+						bgGradient={
+							isActive(genre)
+								? colorMode === "light"
+									? "linear-gradient(to right, #fbb6ce, #d6bcfa)"
+									: "linear-gradient(to right, #97266d, #6b46c1)"
+								: undefined
+						}
 						onClick={() => handleGenreSelection(genre)}
 						w={"100%"}
 						borderRadius={"md"}
