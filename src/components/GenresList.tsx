@@ -5,10 +5,9 @@ import { HStack, Image, Text, VStack } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 
 const GenresList = () => {
-	// return <GenresListSkeleton />;
 	const { colorMode } = useColorMode();
 	const { data: genres, isLoading, error } = useGenres();
-	if (error) return <div>Error: {error.message}</div>;
+	if (error) return null;
 	return (
 		<VStack w={"100%"} p={4} alignItems='flex-start' gap={4}>
 			{isLoading &&
