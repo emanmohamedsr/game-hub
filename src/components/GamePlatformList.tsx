@@ -31,13 +31,16 @@ const GamePlatformList = ({ platforms }: Iprops) => {
 	};
 	return (
 		<HStack alignItems={"start"} gap={2} flexWrap={"wrap"} h={"45px"}>
-			{platforms.map((platform) => (
-				<Icon
-					key={platform.id}
-					as={iconMap[platform.slug]}
-					color={"gray.500"}
-				/>
-			))}
+			{platforms.map(
+				(platform) =>
+					iconMap[platform.slug] && (
+						<Icon
+							key={platform.id}
+							as={iconMap[platform.slug]}
+							color={"gray.500"}
+						/>
+					),
+			)}
 		</HStack>
 	);
 };
