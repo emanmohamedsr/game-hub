@@ -16,18 +16,18 @@ interface Iprops {
 }
 
 const SelectMenu = ({ title, items, isLoading, onSelectPlatform }: Iprops) => {
+	const newItems = [{ id: 0, name: "All", slug: "all" }, ...items];
 	const collection = createListCollection({
-		items: items.map((platform) => platform.name),
+		items: newItems.map((platform) => platform.name),
 	});
 
 	return (
 		<Select.Root
 			onValueChange={(details) => {
-				const platform = items.find(
+				const platform = newItems.find(
 					(p) => p.name.toLowerCase() === details.items[0].toLowerCase(),
 				);
-				console.log(details, platform);
-				onSelectPlatform(platform || null);
+				onSelectPlatform(platform?.slug === "all" ? null : platform || null);
 			}}
 			closeOnSelect
 			lazyMount
@@ -56,7 +56,7 @@ const SelectMenu = ({ title, items, isLoading, onSelectPlatform }: Iprops) => {
 			<Portal>
 				<Select.Positioner>
 					<Select.Content>
-						{items.map((item) => (
+						{newItems.map((item) => (
 							<Select.Item item={item.name} key={item.id}>
 								{item.name}
 								<Select.ItemIndicator />

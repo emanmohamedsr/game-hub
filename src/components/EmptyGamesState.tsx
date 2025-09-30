@@ -11,7 +11,7 @@ const EmptyGamesState = ({
 	description = "Explore our vast collection",
 }: Iprops) => {
 	return (
-		<HStack justifyContent='center' alignItems={"center"}>
+		<HStack justifyContent='center' alignItems={"center"} w={"100%"}>
 			<EmptyState.Root size={{ base: "sm", md: "md", lg: "lg" }}>
 				<EmptyState.Content>
 					<EmptyState.Indicator>
