@@ -34,15 +34,9 @@ export const ColorModeButton = React.forwardRef<
 				onClick={toggleColorMode}
 				variant='ghost'
 				aria-label='Toggle color mode'
-				size='sm'
+				size={{ base: "sm", sm: "xl" }}
 				ref={ref}
-				{...props}
-				css={{
-					_icon: {
-						width: "5",
-						height: "5",
-					},
-				}}>
+				{...props}>
 				<ColorModeIcon />
 			</IconButton>
 		</ClientOnly>

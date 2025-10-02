@@ -34,6 +34,7 @@ const SelectMenu = <T extends INamed | string>({
 
 	return (
 		<Select.Root
+			rounded={"lg"}
 			onValueChange={(details) => {
 				const selectedItem = items.find(
 					(i) => getLabel(i).toLowerCase() === details.items[0].toLowerCase(),
