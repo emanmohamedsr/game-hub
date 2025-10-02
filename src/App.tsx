@@ -7,6 +7,7 @@ import Main from "./components/Main";
 
 const App = () => {
 	const [selectedGenre, setSelectedGenre] = useState<IGenre | null>(null);
+	const [searchText, setSearchText] = useState<string>("");
 	return (
 		<Grid
 			templateAreas={{
@@ -16,6 +17,7 @@ const App = () => {
 			templateColumns={{ base: "1fr", lg: "200px 1fr" }}>
 			<GridItem area={"nav"}>
 				<NavBar
+					onSearch={setSearchText}
 					setSelectedGenre={setSelectedGenre}
 					selectedGenre={selectedGenre}
 				/>
@@ -27,7 +29,7 @@ const App = () => {
 				/>
 			</GridItem>
 			<GridItem area={"main"} px={6}>
-				<Main selectedGenre={selectedGenre} />
+				<Main selectedGenre={selectedGenre} searchText={searchText} />
 			</GridItem>
 		</Grid>
 	);

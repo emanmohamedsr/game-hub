@@ -9,14 +9,20 @@ import SearchDialog from "../SearchDialog";
 interface IProps {
 	setSelectedGenre: (genre: IGenre | null) => void;
 	selectedGenre: IGenre | null;
+	onSearch: (searchText: string) => void;
 }
 
-const NavBar = ({ setSelectedGenre, selectedGenre }: IProps) => {
+const NavBar = ({ setSelectedGenre, selectedGenre, onSearch }: IProps) => {
 	return (
 		<HStack justifyContent={"space-between"} px={4} py={2}>
 			<HStack>
-				<Image src={logo} alt='logo' w={{ base: "30px", sm: "60px" }} />
-				<Box display={{ base: "block", lg: "none" }}>
+				<Image
+					src={logo}
+					alt='logo'
+					w={{ base: "30px", sm: "60px" }}
+					mr={{ base: -2, sm: 0 }}
+				/>
+				<Box display={{ base: "block", lg: "none" }} mr={{ base: -2, sm: 0 }}>
 					<GenreListDrawer
 						setSelectedGenre={setSelectedGenre}
 						selectedGenre={selectedGenre}>
@@ -29,7 +35,7 @@ const NavBar = ({ setSelectedGenre, selectedGenre }: IProps) => {
 						</IconButton>
 					</GenreListDrawer>
 				</Box>
-				<SearchDialog />
+				<SearchDialog onSearch={onSearch} />
 			</HStack>
 			<ColorModeButton />
 		</HStack>

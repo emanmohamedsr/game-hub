@@ -8,9 +8,10 @@ import { sortingOptions } from "./constants";
 
 interface IProps {
 	selectedGenre: IGenre | null;
+	searchText: string;
 }
 
-const Main = ({ selectedGenre }: IProps) => {
+const Main = ({ selectedGenre, searchText }: IProps) => {
 	const { data: platforms, isLoading, error } = usePlatforms();
 	const [selectedPlatform, setSelectedPlatform] = useState<IPlatform | null>(
 		null,
@@ -34,6 +35,7 @@ const Main = ({ selectedGenre }: IProps) => {
 				/>
 			</HStack>
 			<GamesList
+				searchText={searchText}
 				selectedPlatform={selectedPlatform}
 				selectedGenre={selectedGenre}
 				selectedSort={selectedSort}
