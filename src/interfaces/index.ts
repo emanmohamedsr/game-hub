@@ -17,3 +17,8 @@ export interface IGenre {
 	name: string;
 	image_background: string;
 }
+
+export interface ISortingOption {
+	name: string;
+	value: string;
+}

@@ -1,4 +1,3 @@
-import type { IPlatform } from "@/interfaces";
 import {
 	createListCollection,
 	HStack,
@@ -8,26 +7,38 @@ import {
 	Text,
 } from "@chakra-ui/react";
 
-interface Iprops {
-	isLoading?: boolean;
-	title: string;
-	items: IPlatform[];
-	onSelectPlatform: (platform: IPlatform | null) => void;
+interface INamed {
+	name: string;
 }
 
-const SelectMenu = ({ title, items, isLoading, onSelectPlatform }: Iprops) => {
-	const newItems = [{ id: 0, name: "All", slug: "all" }, ...items];
+interface Iprops<T extends INamed | string> {
+	isLoading?: boolean;
+	title: string;
+	items: T[];
+	onSelectItem: (item: T | null) => void;
+	getLabel?: (item: T) => string;
+	getKey?: (item: T) => string;
+}
+
+const SelectMenu = <T extends INamed | string>({
+	title,
+	items,
+	isLoading,
+	onSelectItem,
+	getLabel = (item) => (typeof item === "string" ? item : item.name),
+	getKey = (item) => (typeof item === "string" ? item : item.name),
+}: Iprops<T>) => {
 	const collection = createListCollection({
-		items: newItems.map((platform) => platform.name),
+		items: items.map(getLabel),
 	});
 
 	return (
 		<Select.Root
 			onValueChange={(details) => {
-				const platform = newItems.find(
-					(p) => p.name.toLowerCase() === details.items[0].toLowerCase(),
+				const selectedItem = items.find(
+					(i) => getLabel(i).toLowerCase() === details.items[0].toLowerCase(),
 				);
-				onSelectPlatform(platform?.slug === "all" ? null : platform || null);
+				onSelectItem(selectedItem as T | null);
 			}}
 			closeOnSelect
 			lazyMount
@@ -56,9 +67,9 @@ const SelectMenu = ({ title, items, isLoading, onSelectPlatform }: Iprops) => {
 			<Portal>
 				<Select.Positioner>
 					<Select.Content>
-						{newItems.map((item) => (
-							<Select.Item item={item.name} key={item.id}>
-								{item.name}
+						{items.map((item) => (
+							<Select.Item item={getLabel(item)} key={getKey(item)}>
+								{getLabel(item)}
 								<Select.ItemIndicator />
 							</Select.Item>
 						))}

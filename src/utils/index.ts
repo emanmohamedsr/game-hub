@@ -11,7 +11,10 @@ export const getCroppedImageUrl = ({
 	width = 600,
 	height = 400,
 }: IGetCroppedImageUrlProps) => {
+	if (!url) return undefined;
+
 	const index = url.indexOf(target);
+	if (index === -1) return url;
 	if (!url || index === -1) return url;
 	return (
 		url.slice(0, index + target.length) +

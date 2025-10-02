@@ -3,6 +3,7 @@ import { Card, HStack, Image } from "@chakra-ui/react";
 import GamePlatformList from "./GamePlatformList";
 import CriticScore from "./CriticScore";
 import { getCroppedText, getCroppedImageUrl } from "@/utils";
+import fallbackImage from "@/assets/no-image-placeholder.webp";
 
 interface Iprops {
 	game: IGame;
@@ -19,7 +20,9 @@ const GameCard = ({ game }: Iprops) => {
 			transition='all ease-in-out 0.3s'>
 			<Image
 				objectFit='cover'
-				src={getCroppedImageUrl({ url: game.background_image })}
+				src={
+					getCroppedImageUrl({ url: game.background_image }) || fallbackImage
+				}
 				alt={game.name}
 			/>
 			<Card.Body gap='12px'>
