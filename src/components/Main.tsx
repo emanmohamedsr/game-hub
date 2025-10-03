@@ -40,14 +40,30 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 			<HStack gap={4} flexWrap='wrap' w='100%'>
 				<SelectMenu<IPlatform>
 					isLoading={isLoading}
-					items={error ? [] : platforms ? platforms : []}
-					onSelectItem={(platform) => setGameQuery({ ...gameQuery, platform })}
+					items={
+						error
+							? []
+							: platforms
+							? [{ id: 0, name: "All", slug: "all" }, ...platforms]
+							: []
+					}
+					onSelectItem={(platform) =>
+						setGameQuery({
+							...gameQuery,
+							platform: platform?.name === "All" ? null : platform,
+						})
+					}
 					title='Select Platform'
 				/>
 				<SelectMenu<ISortingOption>
 					isLoading={isLoading}
 					items={sortingOptions}
-					onSelectItem={(sort) => setGameQuery({ ...gameQuery, sort })}
+					onSelectItem={(sort) =>
+						setGameQuery({
+							...gameQuery,
+							sort: sort?.name === "All" ? null : sort,
+						})
+					}
 					title='Select Sorting'
 				/>
 			</HStack>
