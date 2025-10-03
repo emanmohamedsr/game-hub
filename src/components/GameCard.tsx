@@ -10,7 +10,9 @@ interface Iprops {
 }
 
 const GameCard = ({ game }: Iprops) => {
-	const gamePlatforms = game.parent_platforms.map(({ platform }) => platform);
+	const gamePlatforms =
+		game.parent_platforms?.map(({ platform }) => platform) ?? [];
+
 	return (
 		<Card.Root
 			borderRadius={"md"}
