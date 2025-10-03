@@ -3,26 +3,14 @@ import EmptyGamesState from "./EmptyGamesState";
 import GameGrid from "./GameGrid";
 import GameCardSkeleton from "./GameCardSkeleton";
 import useGames from "@/hooks/useGames";
-import type { IGenre, IPlatform, ISortingOption } from "@/interfaces";
+import type { IGameQuery } from "@/interfaces";
 
 interface IProps {
-	selectedGenre: IGenre | null;
-	selectedPlatform: IPlatform | null;
-	selectedSort: ISortingOption | null;
-	searchText: string;
+	gameQuery?: IGameQuery;
 }
 
-const GamesList = ({
-	selectedGenre,
-	selectedPlatform,
-	selectedSort,
-	searchText,
-}: IProps) => {
-	const {
-		data: games,
-		isLoading,
-		error,
-	} = useGames({ selectedGenre, selectedPlatform, selectedSort, searchText });
+const GamesList = ({ gameQuery }: IProps) => {
+	const { data: games, isLoading, error } = useGames({ gameQuery });
 	if (error) return <div>Error: {error.message}</div>;
 	if (!games || (games && games.length === 0)) return <EmptyGamesState />;
 	if (isLoading) {

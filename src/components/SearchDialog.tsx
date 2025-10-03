@@ -12,7 +12,7 @@ import { useRef, useState, type FormEvent } from "react";
 import { LuSearch } from "react-icons/lu";
 
 interface IProps {
-	onSearch: (searchText: string) => void;
+	onSearch: (searchText: string | null) => void;
 }
 
 const SearchDialog = ({ onSearch }: IProps) => {
@@ -23,7 +23,7 @@ const SearchDialog = ({ onSearch }: IProps) => {
 	const handleFormSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		if (ref.current) {
-			onSearch(ref.current.value);
+			onSearch(ref.current.value || null);
 			setOpen(false);
 		}
 	};

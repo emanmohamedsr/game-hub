@@ -1,22 +1,18 @@
-import type { IGenre, IPlatform, ISortingOption } from "@/interfaces";
+import type { IGameQuery, IPlatform, ISortingOption } from "@/interfaces";
 import { HStack, VStack } from "@chakra-ui/react";
 import SelectMenu from "./ui/SelectMenu";
 import GamesList from "./GamesList";
 import usePlatforms from "@/hooks/usePlatforms";
-import { useState } from "react";
 import { sortingOptions } from "./constants";
 
 interface IProps {
-	selectedGenre: IGenre | null;
-	searchText: string;
+	gameQuery?: IGameQuery;
+	onSelectPlatform: (platform: IPlatform | null) => void;
+	onSelectSort: (sort: ISortingOption | null) => void;
 }
 
-const Main = ({ selectedGenre, searchText }: IProps) => {
+const Main = ({ gameQuery, onSelectPlatform, onSelectSort }: IProps) => {
 	const { data: platforms, isLoading, error } = usePlatforms();
-	const [selectedPlatform, setSelectedPlatform] = useState<IPlatform | null>(
-		null,
-	);
-	const [selectedSort, setSelectedSort] = useState<ISortingOption | null>(null);
 
 	return (
 		<VStack w={"100%"} alignItems='flex-start' gap={4}>
@@ -24,22 +20,17 @@ const Main = ({ selectedGenre, searchText }: IProps) => {
 				<SelectMenu<IPlatform>
 					isLoading={isLoading}
 					items={error ? [] : platforms ? platforms : []}
-					onSelectItem={setSelectedPlatform}
+					onSelectItem={onSelectPlatform}
 					title='Select Platform'
 				/>
 				<SelectMenu<ISortingOption>
 					isLoading={isLoading}
 					items={sortingOptions}
-					onSelectItem={setSelectedSort}
+					onSelectItem={onSelectSort}
 					title='Select Sorting'
 				/>
 			</HStack>
-			<GamesList
-				searchText={searchText}
-				selectedPlatform={selectedPlatform}
-				selectedGenre={selectedGenre}
-				selectedSort={selectedSort}
-			/>
+			<GamesList gameQuery={gameQuery} />
 		</VStack>
 	);
 };

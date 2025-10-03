@@ -1,28 +1,20 @@
-import type { IGame, IGenre, IPlatform, ISortingOption } from "@/interfaces";
+import type { IGame, IGameQuery } from "@/interfaces";
 import useData from "./useData";
 import { useMemo } from "react";
 
 interface IUseGamesProps {
-	selectedGenre: IGenre | null;
-	selectedPlatform?: IPlatform | null;
-	selectedSort?: ISortingOption | null;
-	searchText?: string;
+	gameQuery?: IGameQuery;
 }
 
-const useGames = ({
-	selectedGenre,
-	selectedPlatform,
-	selectedSort,
-	searchText,
-}: IUseGamesProps) => {
+const useGames = ({ gameQuery }: IUseGamesProps) => {
 	const params = useMemo(
 		() => ({
-			genres: selectedGenre?.id,
-			platforms: selectedPlatform?.id,
-			ordering: selectedSort?.value,
-			search: searchText,
+			genres: gameQuery?.genre?.id,
+			platforms: gameQuery?.platform?.id,
+			ordering: gameQuery?.sort?.value,
+			search: gameQuery?.search,
 		}),
-		[selectedGenre?.id, selectedPlatform?.id, selectedSort?.value, searchText],
+		[gameQuery],
 	);
 	return useData<IGame>({
 		endpoint: "games",

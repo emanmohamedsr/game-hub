@@ -22,3 +22,10 @@ export interface ISortingOption {
 	name: string;
 	value: string;
 }
+
+export interface IGameQuery {
+	genre?: IGenre | null;
+	platform?: IPlatform | null;
+	sort?: ISortingOption | null;
+	search?: string | null;
+}

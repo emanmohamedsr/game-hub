@@ -2,12 +2,12 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./components/layout/NavBar";
 import GenresList from "./components/GenresList";
 import { useState } from "react";
-import type { IGenre } from "./interfaces";
+import type { IGameQuery } from "./interfaces";
 import Main from "./components/Main";
 
 const App = () => {
-	const [selectedGenre, setSelectedGenre] = useState<IGenre | null>(null);
-	const [searchText, setSearchText] = useState<string>("");
+	const [gameQuery, setGameQuery] = useState<IGameQuery>();
+
 	return (
 		<Grid
 			templateAreas={{
@@ -17,19 +17,27 @@ const App = () => {
 			templateColumns={{ base: "1fr", lg: "200px 1fr" }}>
 			<GridItem area={"nav"}>
 				<NavBar
-					onSearch={setSearchText}
-					setSelectedGenre={setSelectedGenre}
-					selectedGenre={selectedGenre}
+					onSearch={(searchText) =>
+						setGameQuery({ ...gameQuery, search: searchText })
+					}
+					setSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+					selectedGenre={gameQuery?.genre || null}
 				/>
 			</GridItem>
 			<GridItem display={{ base: "none", lg: "block" }} area={"aside"} pl={2}>
 				<GenresList
-					setSelectedGenre={setSelectedGenre}
-					selectedGenre={selectedGenre}
+					setSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+					selectedGenre={gameQuery?.genre || null}
 				/>
 			</GridItem>
 			<GridItem area={"main"} px={6}>
-				<Main selectedGenre={selectedGenre} searchText={searchText} />
+				<Main
+					gameQuery={gameQuery}
+					onSelectPlatform={(platform) =>
+						setGameQuery({ ...gameQuery, platform })
+					}
+					onSelectSort={(sort) => setGameQuery({ ...gameQuery, sort })}
+				/>
 			</GridItem>
 		</Grid>
 	);

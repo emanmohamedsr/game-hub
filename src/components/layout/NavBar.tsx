@@ -9,7 +9,7 @@ import SearchDialog from "../SearchDialog";
 interface IProps {
 	setSelectedGenre: (genre: IGenre | null) => void;
 	selectedGenre: IGenre | null;
-	onSearch: (searchText: string) => void;
+	onSearch: (searchText: string | null) => void;
 }
 
 const NavBar = ({ setSelectedGenre, selectedGenre, onSearch }: IProps) => {
