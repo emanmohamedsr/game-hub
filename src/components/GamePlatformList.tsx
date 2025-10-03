@@ -11,6 +11,7 @@ import {
 import { MdPhoneIphone } from "react-icons/md";
 import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
+import { TbDeviceUnknown } from "react-icons/tb";
 import type { IconType } from "react-icons";
 
 interface Iprops {
@@ -36,7 +37,7 @@ const GamePlatformList = ({ platforms }: Iprops) => {
 					iconMap[platform.slug] && (
 						<Icon
 							key={platform.id}
-							as={iconMap[platform.slug]}
+							as={iconMap[platform.slug] || TbDeviceUnknown}
 							color={"gray.500"}
 						/>
 					),
