@@ -31,13 +31,7 @@ const App = () => {
 				/>
 			</GridItem>
 			<GridItem area={"main"} px={6}>
-				<Main
-					gameQuery={gameQuery}
-					onSelectPlatform={(platform) =>
-						setGameQuery({ ...gameQuery, platform })
-					}
-					onSelectSort={(sort) => setGameQuery({ ...gameQuery, sort })}
-				/>
+				<Main setGameQuery={setGameQuery} gameQuery={gameQuery} />
 			</GridItem>
 		</Grid>
 	);
