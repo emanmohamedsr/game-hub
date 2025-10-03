@@ -16,7 +16,7 @@ const BreadcrumbOrder = ({ order, onClickBreadcrumb }: Iprops) => {
 				<Breadcrumb.Item
 					cursor={"pointer"}
 					fontWeight={"bold"}
-					fontSize={"4xl"}
+					fontSize={{ base: "sm", sm: "md", md: "2xl", lg: "4xl" }}
 					onClick={() => onClickBreadcrumb?.(item, index)}>
 					{index === order.length - 1 ? (
 						<Breadcrumb.CurrentLink
@@ -34,7 +34,7 @@ const BreadcrumbOrder = ({ order, onClickBreadcrumb }: Iprops) => {
 
 	return (
 		<Breadcrumb.Root>
-			<Breadcrumb.List mt={6} mb={8}>
+			<Breadcrumb.List mt={6} mb={{ base: 6, md: 8 }} flexWrap={"wrap"}>
 				{renderBreadcrumbs()}
 			</Breadcrumb.List>
 		</Breadcrumb.Root>
