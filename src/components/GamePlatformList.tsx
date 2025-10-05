@@ -31,7 +31,7 @@ const GamePlatformList = ({ platforms }: Iprops) => {
 		web: BsGlobe,
 	};
 	return (
-		<HStack alignItems={"start"} gap={2} flexWrap={"wrap"} h={"45px"}>
+		<HStack alignItems={"start"} gap={2} flexWrap={"wrap"}>
 			{platforms.map(
 				(platform) =>
 					iconMap[platform.slug] && (

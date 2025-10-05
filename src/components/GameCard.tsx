@@ -4,6 +4,7 @@ import GamePlatformList from "./GamePlatformList";
 import CriticScore from "./CriticScore";
 import { getCroppedText, getCroppedImageUrl } from "@/utils";
 import fallbackImage from "@/assets/no-image-placeholder.webp";
+import GameStars from "./GameStars";
 
 interface Iprops {
 	game: IGame;
@@ -35,6 +36,7 @@ const GameCard = ({ game }: Iprops) => {
 					<GamePlatformList platforms={gamePlatforms} />
 					<CriticScore score={game.metacritic} />
 				</HStack>
+				<GameStars rating={game.rating} />
 			</Card.Body>
 		</Card.Root>
 	);
