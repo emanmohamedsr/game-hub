@@ -7,6 +7,9 @@ const config = defineConfig({
 			padding: 0,
 			boxSizing: "border-box",
 			fontFamily: "body",
+			bg: "bg",
+			color: "text",
+			transition: "background-color 0.2s, color 0.2s",
 		},
 	},
 	theme: {
@@ -18,13 +21,25 @@ const config = defineConfig({
 		},
 		tokens: {
 			colors: {
-				primary: {
-					DEFAULT: { value: "#0FEE0F" },
-					_dark: { value: "#f1f7f1ff" },
-					_light: { value: "#0FEE0F" },
-					100: { value: "#203f20ff" },
-					200: { value: "#255625ff" },
-					300: { value: "#165316ff" },
+				gray: {
+					50: { value: "#f9f9f9" },
+					100: { value: "#ededed" },
+					200: { value: "#d3d3d3" },
+					300: { value: "#b3b3b3" },
+					400: { value: "#a0a0a0" },
+					500: { value: "#898989" },
+					600: { value: "#6c6c6c" },
+					700: { value: "#202020" },
+					800: { value: "#121212" },
+					900: { value: "#111" },
+				},
+				bg: {
+					light: { value: "{colors.gray.50}" },
+					dark: { value: "{colors.gray.900}" },
+				},
+				text: {
+					light: { value: "{colors.gray.900}" },
+					dark: { value: "{colors.gray.50}" },
 				},
 			},
 			fonts: {
