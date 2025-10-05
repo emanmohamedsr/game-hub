@@ -4,6 +4,7 @@ import GameGrid from "./GameGrid";
 import GameCardSkeleton from "./GameCardSkeleton";
 import useGames from "@/hooks/useGames";
 import type { IGameQuery } from "@/interfaces";
+import Error from "./error/Error";
 
 interface IProps {
 	gameQuery?: IGameQuery;
@@ -11,7 +12,8 @@ interface IProps {
 
 const GamesList = ({ gameQuery }: IProps) => {
 	const { data: games, isLoading, error } = useGames({ gameQuery });
-	if (error) return <div>Error: {error.message}</div>;
+	if (error)
+		return <Error error={error} onRetry={() => window.location.reload()} />;
 	if (!games || (games && games.length === 0)) return <EmptyGamesState />;
 	if (isLoading) {
 		return (

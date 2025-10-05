@@ -5,6 +5,7 @@ import { HStack, Image, Text, VStack } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 import type { IGenre } from "@/interfaces";
 import allGenres from "../assets/all-genres.webp";
+import Error from "./error/Error";
 
 interface IProps {
 	setSelectedGenre: (genre: IGenre | null) => void;
@@ -23,7 +24,8 @@ const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
 		setSelectedGenre(genre);
 	};
 
-	if (error) return null;
+	if (error)
+		return <Error error={error} onRetry={() => window.location.reload()} />;
 	return (
 		<VStack w={"100%"} p={4} alignItems='flex-start' gap={4}>
 			{isLoading &&
