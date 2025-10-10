@@ -5,23 +5,15 @@ import GameCardSkeleton from "./GameCardSkeleton";
 import useGames from "@/hooks/useGames";
 import type { IGameQuery } from "@/interfaces";
 import Error from "./error/Error";
-import { useColorMode } from "@/hooks/useColorMode";
-import { Button, Skeleton, Spinner } from "@chakra-ui/react";
+import { Skeleton, Spinner, Text } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface IProps {
 	gameQuery?: IGameQuery;
 }
 
 const GamesList = ({ gameQuery }: IProps) => {
-	const { colorMode } = useColorMode();
-	const {
-		data,
-		isLoading,
-		error,
-		fetchNextPage,
-		hasNextPage,
-		isFetchingNextPage,
-	} = useGames({
+	const { data, isLoading, error, fetchNextPage, hasNextPage } = useGames({
 		gameQuery,
 	});
 	if (error)
@@ -46,8 +38,23 @@ const GamesList = ({ gameQuery }: IProps) => {
 			</>
 		);
 	}
+	const fetchedGamesCount =
+		data?.pages.reduce((acc, page) => acc + page.results.length, 0) || 0;
 	return (
-		<>
+		<InfiniteScroll
+			dataLength={fetchedGamesCount}
+			next={() => fetchNextPage()}
+			hasMore={!!hasNextPage}
+			loader={<Spinner size={"md"} my={4} />}
+			endMessage={
+				<Text
+					textAlign='center'
+					my={4}
+					fontWeight='bold'
+					fontSize={{ base: "md", md: "lg" }}>
+					You have seen it all!
+				</Text>
+			}>
 			{data?.pages.map((page, pageIndex) => (
 				<GameGrid key={pageIndex}>
 					{page.results.map((game) => (
@@ -55,37 +62,7 @@ const GamesList = ({ gameQuery }: IProps) => {
 					))}
 				</GameGrid>
 			))}
-			{hasNextPage && (
-				<Button
-					_disabled={{
-						opacity: 0.5,
-						cursor: "not-allowed",
-					}}
-					disabled={isFetchingNextPage}
-					onClick={() => fetchNextPage()}
-					mx={"auto"}
-					my={4}
-					p={6}
-					borderRadius={"md"}
-					color={colorMode === "light" ? "black" : "white"}
-					fontWeight={"bold"}
-					bgGradient={
-						colorMode === "light"
-							? "linear-gradient(to right, #fbb6ce, #d6bcfa)"
-							: "linear-gradient(to right, #97266d, #6b46c1)"
-					}
-					_hover={{
-						opacity: 0.8,
-					}}>
-					{isFetchingNextPage && <Spinner size='sm' />}
-					{isFetchingNextPage
-						? "Loading..."
-						: hasNextPage
-						? "Load More"
-						: "No More Games"}
-				</Button>
-			)}
-		</>
+		</InfiniteScroll>
 	);
 };
 
