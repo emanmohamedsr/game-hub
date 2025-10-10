@@ -19,7 +19,7 @@ const useGenres = () => {
 		queryKey: ["genres"],
 		queryFn: fetchGenres,
 		staleTime: 24 * 60 * 60 * 1000,
-		initialData: { count: 0, results: genres },
+		initialData: { count: genres.length, results: genres },
 	});
 };
 export default useGenres;

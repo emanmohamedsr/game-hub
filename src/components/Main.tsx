@@ -43,8 +43,8 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 					items={
 						error
 							? []
-							: platforms
-							? [{ id: 0, name: "All", slug: "all" }, ...platforms]
+							: platforms.results
+							? [{ id: 0, name: "All", slug: "all" }, ...platforms.results]
 							: []
 					}
 					onSelectItem={(platform) =>
