@@ -33,7 +33,7 @@ const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
 					<GenreSkeleton key={index} />
 				))}
 
-			{!isLoading && genres && genres.length > 0 && (
+			{!isLoading && genres && genres.results.length > 0 && (
 				<HStack
 					bgGradient={
 						isActive(null)
@@ -63,8 +63,8 @@ const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
 				</HStack>
 			)}
 
-			{genres && genres.length > 0 ? (
-				genres?.map((genre) => (
+			{genres && genres.results.length > 0 ? (
+				genres?.results.map((genre) => (
 					<HStack
 						bgGradient={
 							isActive(genre)
