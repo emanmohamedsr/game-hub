@@ -12,8 +12,10 @@ interface IProps {
 }
 
 const Main = ({ gameQuery, setGameQuery }: IProps) => {
-	const { data: platforms, isLoading, error } = usePlatforms();
+	const { data, isLoading, error } = usePlatforms();
+	const platforms = data?.results;
 
+	// Breadcrumb logic
 	const breadcrumbOrder = [
 		"Games",
 		gameQuery?.genre?.name,
@@ -30,6 +32,7 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 			setGameQuery({ ...gameQuery, search: null });
 		else return;
 	};
+	// End Breadcrumb logic
 
 	return (
 		<VStack w={"100%"} alignItems='flex-start' gap={4}>
@@ -43,8 +46,8 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 					items={
 						error
 							? []
-							: platforms.results
-							? [{ id: 0, name: "All", slug: "all" }, ...platforms.results]
+							: platforms
+							? [{ id: 0, name: "All", slug: "all" }, ...platforms]
 							: []
 					}
 					onSelectItem={(platform) =>

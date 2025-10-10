@@ -1,25 +1,17 @@
-import axiosInstance from "@/config/axiosInstance.config";
 import genres from "@/data/genres";
-import type { IGenre } from "@/interfaces";
+import type { IFetchDataResponse, IGenre } from "@/interfaces";
+import APIClient from "@/services/API-Client";
 import { useQuery } from "@tanstack/react-query";
-import type { AxiosError, AxiosResponse } from "axios";
+import type { AxiosError } from "axios";
 
-export interface IFetchDataResponse<T> {
-	count: number;
-	results: T[];
-}
+const apiClient = new APIClient<IGenre>("genres");
 
-const useGenres = () => {
-	const fetchGenres = () =>
-		axiosInstance
-			.get("/genres")
-			.then((res: AxiosResponse<IFetchDataResponse<IGenre>>) => res.data);
-
-	return useQuery<IFetchDataResponse<IGenre>, AxiosError>({
+const useGenres = () =>
+	useQuery<IFetchDataResponse<IGenre>, AxiosError>({
 		queryKey: ["genres"],
-		queryFn: fetchGenres,
+		queryFn: apiClient.getAll,
 		staleTime: 24 * 60 * 60 * 1000,
-		initialData: { count: genres.length, results: genres },
+		initialData: { count: genres.length, results: genres, next: null },
 	});
-};
+
 export default useGenres;

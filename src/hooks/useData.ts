@@ -1,43 +1,21 @@
-import axiosInstance from "@/config/axiosInstance.config";
-import { CanceledError, type AxiosError, type AxiosRequestConfig } from "axios";
-import { useEffect, useState } from "react";
-
-export interface IFetchDataResponse<T> {
-	count: number;
-	results: T[];
-}
+import type { IFetchDataResponse } from "@/interfaces";
+import APIClient from "@/services/API-Client";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosError, type AxiosRequestConfig } from "axios";
 
 interface IProps {
 	endpoint: string;
 	requestConfig?: AxiosRequestConfig;
+	queryConfig?: object;
 }
 
-const useData = <T>({ endpoint, requestConfig }: IProps) => {
-	const params = requestConfig?.params;
-	const [data, setData] = useState<T[]>();
-	const [error, setError] = useState<AxiosError | null>(null);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
-	useEffect(() => {
-		const controller = new AbortController();
-		const signal = controller.signal;
-		setIsLoading(true);
-		axiosInstance
-			.get<IFetchDataResponse<T>>(`/${endpoint}`, { signal, params })
-			.then((res) => {
-				setData(res.data.results);
-				setIsLoading(false);
-			})
-			.catch((err) => {
-				if (err instanceof CanceledError) {
-					setIsLoading(false);
-					return;
-				}
-				setIsLoading(false);
-				setError(err);
-			});
-		return () => controller.abort();
-	}, [endpoint, params]);
-	return { data, error, isLoading };
+const useData = <T>({ endpoint, requestConfig, queryConfig }: IProps) => {
+	const apiClient = new APIClient<T>(endpoint);
+	return useQuery<IFetchDataResponse<T>, AxiosError>({
+		queryKey: requestConfig ? [endpoint, requestConfig] : [endpoint],
+		queryFn: apiClient.getAll,
+		...queryConfig,
+	});
 };
 
 export default useData;

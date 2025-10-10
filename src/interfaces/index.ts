@@ -1,3 +1,9 @@
+export interface IFetchDataResponse<T> {
+	count: number;
+	results: T[];
+	next: string | null;
+}
+
 export interface IGame {
 	id: number;
 	name: string;
