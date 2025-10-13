@@ -1,3 +1,4 @@
+import { ONE_DAY_STALETIME } from "@/components/constants";
 import genres from "@/data/genres";
 import type { IFetchDataResponse, IGenre } from "@/interfaces";
 import APIClient from "@/services/API-Client";
@@ -10,7 +11,7 @@ const useGenres = () =>
 	useQuery<IFetchDataResponse<IGenre>, AxiosError>({
 		queryKey: ["genres"],
 		queryFn: apiClient.getAll,
-		staleTime: 24 * 60 * 60 * 1000,
+		staleTime: ONE_DAY_STALETIME,
 		initialData: genres,
 	});
 

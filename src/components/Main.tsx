@@ -1,10 +1,10 @@
+import usePlatforms from "@/hooks/usePlatforms";
 import type { IGameQuery, IPlatform, ISortingOption } from "@/interfaces";
 import { HStack, VStack } from "@chakra-ui/react";
-import SelectMenu from "./ui/SelectMenu";
-import GamesList from "./GamesList";
-import usePlatforms from "@/hooks/usePlatforms";
-import { sortingOptions } from "./constants";
 import BreadcrumbOrder from "./BreadcrumbOrder";
+import { sortingOptions } from "./constants";
+import GamesList from "./GamesList";
+import SelectMenu from "./ui/SelectMenu";
 
 interface IProps {
 	setGameQuery: (query: IGameQuery) => void;

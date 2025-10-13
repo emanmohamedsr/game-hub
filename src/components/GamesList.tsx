@@ -1,12 +1,12 @@
-import GameCard from "./GameCard";
-import EmptyGamesState from "./EmptyGamesState";
-import GameGrid from "./GameGrid";
-import GameCardSkeleton from "./GameCardSkeleton";
 import useGames from "@/hooks/useGames";
 import type { IGameQuery } from "@/interfaces";
-import Error from "./error/Error";
 import { Skeleton, Spinner, Text } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import EmptyGamesState from "./EmptyGamesState";
+import Error from "./error/Error";
+import GameCard from "./GameCard";
+import GameCardSkeleton from "./GameCardSkeleton";
+import GameGrid from "./GameGrid";
 
 interface IProps {
 	gameQuery?: IGameQuery;
