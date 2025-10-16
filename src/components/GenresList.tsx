@@ -5,21 +5,20 @@ import { HStack, Image, Text, VStack } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 import allGenres from "../assets/all-genres.webp";
 import Error from "./error/Error";
+import useGameQueryStore from "@/store";
 
-interface IProps {
-	setSelectedGenreId: (genreId?: number) => void;
-	selectedGenreId?: number;
-}
+const GenresList = () => {
+	const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
+	const setGenreId = useGameQueryStore((s) => s.setGenreId);
 
-const GenresList = ({ setSelectedGenreId, selectedGenreId }: IProps) => {
 	const { colorMode } = useColorMode();
 	const { data: genres, isLoading, error } = useGenres();
 
-	const isActive = (genreId?: number) =>
-		selectedGenreId === genreId || (!selectedGenreId && !genreId);
+	const isActive = (clickedGenreId?: number) =>
+		genreId === clickedGenreId || (!genreId && !clickedGenreId);
 
-	const handleGenreSelection = (genreId?: number) => {
-		setSelectedGenreId(genreId);
+	const handleGenreSelection = (clickedGenreId?: number) => {
+		setGenreId(clickedGenreId);
 	};
 
 	if (error)

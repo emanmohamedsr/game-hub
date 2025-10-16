@@ -1,5 +1,4 @@
 import useGames from "@/hooks/useGames";
-import type { IGameQuery } from "@/interfaces";
 import { Skeleton, Spinner, Text } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import EmptyGamesState from "./EmptyGamesState";
@@ -7,12 +6,10 @@ import Error from "./error/Error";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameGrid from "./GameGrid";
+import useGameQueryStore from "@/store";
 
-interface IProps {
-	gameQuery?: IGameQuery;
-}
-
-const GamesList = ({ gameQuery }: IProps) => {
+const GamesList = () => {
+	const gameQuery = useGameQueryStore((s) => s.gameQuery);
 	const { data, isLoading, error, fetchNextPage, hasNextPage } = useGames({
 		gameQuery,
 	});

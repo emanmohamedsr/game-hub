@@ -5,13 +5,7 @@ import GenreListDrawer from "../GenreListDrawer";
 import { GiHamburgerMenu } from "react-icons/gi";
 import SearchDialog from "../SearchDialog";
 
-interface IProps {
-	setSelectedGenreId: (genreId?: number) => void;
-	selectedGenreId?: number;
-	onSearch: (searchText?: string) => void;
-}
-
-const NavBar = ({ setSelectedGenreId, selectedGenreId, onSearch }: IProps) => {
+const NavBar = () => {
 	return (
 		<HStack justifyContent={"space-between"} px={4} py={2}>
 			<HStack>
@@ -22,9 +16,7 @@ const NavBar = ({ setSelectedGenreId, selectedGenreId, onSearch }: IProps) => {
 					mr={{ base: -2, sm: 0 }}
 				/>
 				<Box display={{ base: "block", lg: "none" }} mr={{ base: -2, sm: 0 }}>
-					<GenreListDrawer
-						setSelectedGenreId={setSelectedGenreId}
-						selectedGenreId={selectedGenreId}>
+					<GenreListDrawer>
 						<IconButton
 							size={{ base: "sm", sm: "xl" }}
 							aria-label='open genre list'
@@ -34,7 +26,7 @@ const NavBar = ({ setSelectedGenreId, selectedGenreId, onSearch }: IProps) => {
 						</IconButton>
 					</GenreListDrawer>
 				</Box>
-				<SearchDialog onSearch={onSearch} />
+				<SearchDialog />
 			</HStack>
 			<ColorModeButton />
 		</HStack>

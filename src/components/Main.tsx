@@ -1,18 +1,17 @@
 import usePlatforms from "@/hooks/usePlatforms";
-import type { IGameQuery, IPlatform, ISortingOption } from "@/interfaces";
+import type { IPlatform, ISortingOption } from "@/interfaces";
 import { HStack, VStack } from "@chakra-ui/react";
 import BreadcrumbOrder from "./BreadcrumbOrder";
 import { sortingOptions } from "./constants";
 import GamesList from "./GamesList";
 import SelectMenu from "./ui/SelectMenu";
 import useGenres from "@/hooks/useGenres";
+import useGameQueryStore from "@/store";
 
-interface IProps {
-	setGameQuery: (query: IGameQuery) => void;
-	gameQuery?: IGameQuery;
-}
+const Main = () => {
+	const { gameQuery, setSearchText, setPlatformId, setGenreId, setSortOrder } =
+		useGameQueryStore();
 
-const Main = ({ gameQuery, setGameQuery }: IProps) => {
 	const { data: genres } = useGenres();
 	const { data, isLoading, error } = usePlatforms();
 	const platforms = data?.results;
@@ -29,13 +28,14 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 	].filter(Boolean) as string[];
 
 	const onClickBreadcrumb = (name: string, index: number) => {
-		if (name === "Games")
-			setGameQuery({ ...gameQuery, genreId: undefined, search: undefined });
-		else if (
+		if (name === "Games") {
+			setGenreId(undefined);
+			setSearchText(undefined);
+		} else if (
 			name === selectedGenre?.name &&
 			index !== breadcrumbOrder.length - 1
 		)
-			setGameQuery({ ...gameQuery, search: undefined });
+			setSearchText(undefined);
 		else return;
 	};
 	// End Breadcrumb logic
@@ -57,10 +57,7 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 							: []
 					}
 					onSelectItem={(platform) =>
-						setGameQuery({
-							...gameQuery,
-							platformId: platform?.id === -1 ? undefined : platform?.id,
-						})
+						setPlatformId(platform?.id === -1 ? undefined : platform?.id)
 					}
 					title='Select Platform'
 				/>
@@ -68,15 +65,12 @@ const Main = ({ gameQuery, setGameQuery }: IProps) => {
 					isLoading={isLoading}
 					items={sortingOptions}
 					onSelectItem={(sort) =>
-						setGameQuery({
-							...gameQuery,
-							sortVal: sort?.name === "All" ? undefined : sort?.value,
-						})
+						setSortOrder(sort?.value === "" ? undefined : sort?.value)
 					}
 					title='Select Sorting'
 				/>
 			</HStack>
-			<GamesList gameQuery={gameQuery} />
+			<GamesList />
 		</VStack>
 	);
 };

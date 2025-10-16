@@ -1,4 +1,5 @@
 import { useColorMode } from "@/hooks/useColorMode";
+import useGameQueryStore from "@/store";
 import {
 	CloseButton,
 	Dialog,
@@ -11,11 +12,8 @@ import {
 import { useRef, useState, type FormEvent } from "react";
 import { LuSearch } from "react-icons/lu";
 
-interface IProps {
-	onSearch: (searchText?: string) => void;
-}
-
-const SearchDialog = ({ onSearch }: IProps) => {
+const SearchDialog = () => {
+	const onSearch = useGameQueryStore((s) => s.setSearchText);
 	const [open, setOpen] = useState(false);
 	const { colorMode } = useColorMode();
 	const ref = useRef<HTMLInputElement>(null);

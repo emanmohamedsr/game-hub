@@ -4,15 +4,9 @@ import GenresList from "./GenresList";
 
 interface IProps {
 	children: ReactNode;
-	setSelectedGenreId: (genreId?: number) => void;
-	selectedGenreId?: number;
 }
 
-const GenreListDrawer = ({
-	children,
-	setSelectedGenreId,
-	selectedGenreId,
-}: IProps) => {
+const GenreListDrawer = ({ children }: IProps) => {
 	return (
 		<Drawer.Root placement={"start"}>
 			<Drawer.Trigger asChild>{children}</Drawer.Trigger>
@@ -24,10 +18,7 @@ const GenreListDrawer = ({
 							<Drawer.Title>Genres List</Drawer.Title>
 						</Drawer.Header>
 						<Drawer.Body>
-							<GenresList
-								setSelectedGenreId={setSelectedGenreId}
-								selectedGenreId={selectedGenreId}
-							/>
+							<GenresList />
 						</Drawer.Body>
 						<Drawer.CloseTrigger asChild>
 							<CloseButton size='sm' />
