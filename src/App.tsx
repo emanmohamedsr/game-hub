@@ -20,14 +20,18 @@ const App = () => {
 					onSearch={(searchText) =>
 						setGameQuery({ ...gameQuery, search: searchText })
 					}
-					setSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-					selectedGenre={gameQuery?.genre || null}
+					setSelectedGenreId={(genreId) =>
+						setGameQuery({ ...gameQuery, genreId })
+					}
+					selectedGenreId={gameQuery?.genreId}
 				/>
 			</GridItem>
 			<GridItem display={{ base: "none", lg: "block" }} area={"aside"} pl={2}>
 				<GenresList
-					setSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
-					selectedGenre={gameQuery?.genre || null}
+					setSelectedGenreId={(genreId) =>
+						setGameQuery({ ...gameQuery, genreId })
+					}
+					selectedGenreId={gameQuery?.genreId}
 				/>
 			</GridItem>
 			<GridItem area={"main"} px={6}>

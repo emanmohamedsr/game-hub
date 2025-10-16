@@ -31,8 +31,8 @@ export interface ISortingOption {
 }
 
 export interface IGameQuery {
-	genre?: IGenre | null;
-	platform?: IPlatform | null;
-	sort?: ISortingOption | null;
-	search?: string | null;
+	genreId?: number;
+	platformId?: number;
+	sortVal?: string;
+	search?: string;
 }

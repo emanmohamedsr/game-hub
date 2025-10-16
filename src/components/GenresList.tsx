@@ -3,25 +3,23 @@ import useGenres from "@/hooks/useGenres";
 import { getCroppedImageUrl } from "@/utils";
 import { HStack, Image, Text, VStack } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
-import type { IGenre } from "@/interfaces";
 import allGenres from "../assets/all-genres.webp";
 import Error from "./error/Error";
 
 interface IProps {
-	setSelectedGenre: (genre: IGenre | null) => void;
-	selectedGenre: IGenre | null;
+	setSelectedGenreId: (genreId?: number) => void;
+	selectedGenreId?: number;
 }
 
-const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
+const GenresList = ({ setSelectedGenreId, selectedGenreId }: IProps) => {
 	const { colorMode } = useColorMode();
 	const { data: genres, isLoading, error } = useGenres();
 
-	const isActive = (genre: IGenre | null) =>
-		selectedGenre?.id === genre?.id ||
-		(selectedGenre === null && genre === null);
+	const isActive = (genreId?: number) =>
+		selectedGenreId === genreId || (!selectedGenreId && !genreId);
 
-	const handleGenreSelection = (genre: IGenre | null) => {
-		setSelectedGenre(genre);
+	const handleGenreSelection = (genreId?: number) => {
+		setSelectedGenreId(genreId);
 	};
 
 	if (error)
@@ -36,13 +34,13 @@ const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
 			{!isLoading && genres && genres.results.length > 0 && (
 				<HStack
 					bgGradient={
-						isActive(null)
+						isActive()
 							? colorMode === "light"
 								? "linear-gradient(to right, #fbb6ce, #d6bcfa)"
 								: "linear-gradient(to right, #97266d, #6b46c1)"
 							: undefined
 					}
-					onClick={() => handleGenreSelection(null)}
+					onClick={() => handleGenreSelection()}
 					w={"100%"}
 					borderRadius={"md"}
 					cursor='pointer'
@@ -67,13 +65,13 @@ const GenresList = ({ setSelectedGenre, selectedGenre }: IProps) => {
 				genres?.results.map((genre) => (
 					<HStack
 						bgGradient={
-							isActive(genre)
+							isActive(genre.id)
 								? colorMode === "light"
 									? "linear-gradient(to right, #fbb6ce, #d6bcfa)"
 									: "linear-gradient(to right, #97266d, #6b46c1)"
 								: undefined
 						}
-						onClick={() => handleGenreSelection(genre)}
+						onClick={() => handleGenreSelection(genre.id)}
 						w={"100%"}
 						borderRadius={"md"}
 						cursor='pointer'

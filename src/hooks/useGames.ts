@@ -7,7 +7,6 @@ import {
 import APIClient from "@/services/API-Client";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
-import { useMemo } from "react";
 
 interface IUseGamesProps {
 	gameQuery?: IGameQuery;
@@ -16,21 +15,18 @@ interface IUseGamesProps {
 const apiClient = new APIClient<IGame>("games");
 
 const useGames = ({ gameQuery }: IUseGamesProps) => {
-	const params = useMemo(
-		() => ({
-			genres: gameQuery?.genre?.id,
-			parent_platforms: gameQuery?.platform?.id,
-			ordering: gameQuery?.sort?.value || undefined,
-			search: gameQuery?.search,
-		}),
-		[gameQuery],
-	);
 	return useInfiniteQuery<IFetchDataResponse<IGame>, AxiosError>({
-		queryKey: gameQuery ? ["games", params] : ["games"],
+		queryKey: ["games", gameQuery || {}],
 		initialPageParam: 1,
 		queryFn: ({ pageParam }) =>
 			apiClient.getAll({
-				params: { ...params, page: pageParam },
+				params: {
+					genres: gameQuery?.genreId,
+					parent_platforms: gameQuery?.platformId,
+					ordering: gameQuery?.sortVal,
+					search: gameQuery?.search,
+					page: pageParam,
+				},
 			}),
 		getNextPageParam: (lastPage, allPages) => {
 			return lastPage.next ? allPages.length + 1 : undefined;

@@ -3,16 +3,15 @@ import logo from "../../assets/logo.webp";
 import { ColorModeButton } from "../ui/color-mode";
 import GenreListDrawer from "../GenreListDrawer";
 import { GiHamburgerMenu } from "react-icons/gi";
-import type { IGenre } from "@/interfaces";
 import SearchDialog from "../SearchDialog";
 
 interface IProps {
-	setSelectedGenre: (genre: IGenre | null) => void;
-	selectedGenre: IGenre | null;
-	onSearch: (searchText: string | null) => void;
+	setSelectedGenreId: (genreId?: number) => void;
+	selectedGenreId?: number;
+	onSearch: (searchText?: string) => void;
 }
 
-const NavBar = ({ setSelectedGenre, selectedGenre, onSearch }: IProps) => {
+const NavBar = ({ setSelectedGenreId, selectedGenreId, onSearch }: IProps) => {
 	return (
 		<HStack justifyContent={"space-between"} px={4} py={2}>
 			<HStack>
@@ -24,8 +23,8 @@ const NavBar = ({ setSelectedGenre, selectedGenre, onSearch }: IProps) => {
 				/>
 				<Box display={{ base: "block", lg: "none" }} mr={{ base: -2, sm: 0 }}>
 					<GenreListDrawer
-						setSelectedGenre={setSelectedGenre}
-						selectedGenre={selectedGenre}>
+						setSelectedGenreId={setSelectedGenreId}
+						selectedGenreId={selectedGenreId}>
 						<IconButton
 							size={{ base: "sm", sm: "xl" }}
 							aria-label='open genre list'

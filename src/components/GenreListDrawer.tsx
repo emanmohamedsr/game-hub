@@ -1,18 +1,17 @@
 import { CloseButton, Drawer, Portal } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import GenresList from "./GenresList";
-import type { IGenre } from "@/interfaces";
 
 interface IProps {
 	children: ReactNode;
-	setSelectedGenre: (genre: IGenre | null) => void;
-	selectedGenre: IGenre | null;
+	setSelectedGenreId: (genreId?: number) => void;
+	selectedGenreId?: number;
 }
 
 const GenreListDrawer = ({
 	children,
-	setSelectedGenre,
-	selectedGenre,
+	setSelectedGenreId,
+	selectedGenreId,
 }: IProps) => {
 	return (
 		<Drawer.Root placement={"start"}>
@@ -26,8 +25,8 @@ const GenreListDrawer = ({
 						</Drawer.Header>
 						<Drawer.Body>
 							<GenresList
-								setSelectedGenre={setSelectedGenre}
-								selectedGenre={selectedGenre}
+								setSelectedGenreId={setSelectedGenreId}
+								selectedGenreId={selectedGenreId}
 							/>
 						</Drawer.Body>
 						<Drawer.CloseTrigger asChild>
