@@ -1,14 +1,14 @@
 import usePlatforms from "@/hooks/usePlatforms";
 import type { IPlatform, ISortingOption } from "@/interfaces";
 import { HStack, VStack } from "@chakra-ui/react";
-import BreadcrumbOrder from "./BreadcrumbOrder";
-import { sortingOptions } from "./constants";
-import GamesList from "./GamesList";
-import SelectMenu from "./ui/SelectMenu";
+import BreadcrumbOrder from "../components/BreadcrumbOrder";
+import { sortingOptions } from "../components/constants";
+import GamesList from "../components/GamesList";
+import SelectMenu from "../components/ui/SelectMenu";
 import useGenres from "@/hooks/useGenres";
 import useGameQueryStore from "@/store";
 
-const Main = () => {
+const GameHub = () => {
 	const { gameQuery, setSearchText, setPlatformId, setGenreId, setSortOrder } =
 		useGameQueryStore();
 
@@ -75,4 +75,4 @@ const Main = () => {
 	);
 };
 
-export default Main;
+export default GameHub;

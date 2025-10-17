@@ -1,20 +1,20 @@
 import useGames from "@/hooks/useGames";
+import useGameQueryStore from "@/store";
 import { Skeleton, Spinner, Text } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import EmptyGamesState from "./EmptyGamesState";
-import Error from "./error/Error";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameGrid from "./GameGrid";
-import useGameQueryStore from "@/store";
+import { Fragment } from "react/jsx-runtime";
+import GameErrorState from "./error";
 
 const GamesList = () => {
 	const gameQuery = useGameQueryStore((s) => s.gameQuery);
 	const { data, isLoading, error, fetchNextPage, hasNextPage } = useGames({
 		gameQuery,
 	});
-	if (error)
-		return <Error error={error} onRetry={() => window.location.reload()} />;
+	if (error) return <GameErrorState error={error} />;
 	if (!data) return <EmptyGamesState />;
 	if (isLoading) {
 		return (
@@ -52,13 +52,15 @@ const GamesList = () => {
 					You have seen it all!
 				</Text>
 			}>
-			{data?.pages.map((page, pageIndex) => (
-				<GameGrid key={pageIndex}>
-					{page.results.map((game) => (
-						<GameCard game={game} key={game.id} />
-					))}
-				</GameGrid>
-			))}
+			<GameGrid>
+				{data?.pages.map((page, pageIndex) => (
+					<Fragment key={pageIndex}>
+						{page.results.map((game) => (
+							<GameCard game={game} key={game.id} />
+						))}
+					</Fragment>
+				))}
+			</GameGrid>
 		</InfiniteScroll>
 	);
 };

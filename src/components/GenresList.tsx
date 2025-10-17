@@ -1,11 +1,11 @@
 import { useColorMode } from "@/hooks/useColorMode";
 import useGenres from "@/hooks/useGenres";
 import { getCroppedImageUrl } from "@/utils";
-import { HStack, Image, Text, VStack } from "@chakra-ui/react";
+import { HStack, Image, Text } from "@chakra-ui/react";
 import GenreSkeleton from "./GenreSkeleton";
 import allGenres from "../assets/all-genres.webp";
-import Error from "./error/Error";
 import useGameQueryStore from "@/store";
+import GameErrorState from "./error";
 
 const GenresList = () => {
 	const genreId = useGameQueryStore((s) => s.gameQuery.genreId);
@@ -21,15 +21,13 @@ const GenresList = () => {
 		setGenreId(clickedGenreId);
 	};
 
-	if (error)
-		return <Error error={error} onRetry={() => window.location.reload()} />;
+	if (error) return <GameErrorState error={error} />;
 	return (
-		<VStack w={"100%"} p={4} alignItems='flex-start' gap={4}>
+		<>
 			{isLoading &&
 				Array.from({ length: 6 }).map((_, index) => (
 					<GenreSkeleton key={index} />
 				))}
-
 			{!isLoading && genres && genres.results.length > 0 && (
 				<HStack
 					bgGradient={
@@ -59,7 +57,6 @@ const GenresList = () => {
 					<Text fontSize='lg'>All</Text>
 				</HStack>
 			)}
-
 			{genres && genres.results.length > 0 ? (
 				genres?.results.map((genre) => (
 					<HStack
@@ -94,7 +91,7 @@ const GenresList = () => {
 			) : (
 				<Text>No genres found.</Text>
 			)}
-		</VStack>
+		</>
 	);
 };
 
