@@ -11,12 +11,12 @@ import GameErrorState from "./error";
 
 const GamesList = () => {
 	const gameQuery = useGameQueryStore((s) => s.gameQuery);
-	const { data, isLoading, error, fetchNextPage, hasNextPage } = useGames({
-		gameQuery,
-	});
+	const { data, isLoading, isFetching, error, fetchNextPage, hasNextPage } =
+		useGames({
+			gameQuery,
+		});
 	if (error) return <GameErrorState error={error} />;
-	if (!data) return <EmptyGamesState />;
-	if (isLoading) {
+	if (isLoading || (isFetching && !data)) {
 		return (
 			<>
 				<GameGrid>
@@ -35,6 +35,8 @@ const GamesList = () => {
 			</>
 		);
 	}
+	if (data?.pages?.[0]?.results.length === 0) return <EmptyGamesState />;
+
 	const fetchedGamesCount =
 		data?.pages.reduce((acc, page) => acc + page.results.length, 0) || 0;
 	return (
