@@ -1,18 +1,29 @@
 import ErrorBoundary from "@/components/error/ErrorBoundary";
 import GameHub from "@/pages";
+import GameHubLayout from "@/pages/GameHubLayout";
 import RootLayout from "@/pages/Layout";
 import PageNotFound from "@/pages/NotFound";
 import { createBrowserRouter } from "react-router-dom";
+import GameDetailPage from "./GameDetail";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <RootLayout />,
+		element: <RootLayout />, // navbar layout
 		errorElement: <ErrorBoundary />,
 		children: [
 			{
-				index: true,
-				element: <GameHub />,
+				element: <GameHubLayout />, // navbar and sidebar layout
+				children: [
+					{
+						index: true,
+						element: <GameHub />,
+					},
+				],
+			},
+			{
+				path: "games/:id",
+				element: <GameDetailPage />,
 			},
 			{
 				path: "*",

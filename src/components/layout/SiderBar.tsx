@@ -61,7 +61,7 @@ const SiderBar = () => {
 					<GenresList />
 				</PCSider>
 			</Box>
-			<Box display={{ base: "block", lg: "none" }}>
+			<Box display={{ base: "block", lg: "none" }} pl={2} my={-6}>
 				<MobileSiderDrawer>
 					<GenresList />
 				</MobileSiderDrawer>
