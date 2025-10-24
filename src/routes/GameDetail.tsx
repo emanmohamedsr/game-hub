@@ -1,5 +1,6 @@
 import GameErrorState from "@/components/error";
 import ExpandableText from "@/components/ExpandableText";
+import GameAttributes from "@/components/GameAttributes";
 import useGame from "@/hooks/useGame";
 import { Box, Button, Heading, Icon, Text } from "@chakra-ui/react";
 import { IoArrowUndoOutline } from "react-icons/io5";
@@ -26,9 +27,11 @@ const GameDetailPage = () => {
 					Back
 				</Text>
 			</Button>
+
 			<Box>
 				<Heading mb={4}>{data.name}</Heading>
 				<ExpandableText text={data.description_raw} limit={300} />
+				<GameAttributes game={data} />
 			</Box>
 		</Box>
 	);

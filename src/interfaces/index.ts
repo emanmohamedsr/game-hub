@@ -4,10 +4,17 @@ export interface IFetchDataResponse<T> {
 	next: string | null;
 }
 
+export interface IPublisher {
+	id: number;
+	name: string;
+}
+
 export interface IGame {
 	id: number;
 	slug: string;
 	name: string;
+	genres: IGenre[];
+	publishers: IPublisher[];
 	description_raw: string;
 	background_image: string;
 	parent_platforms: { platform: IPlatform }[];
