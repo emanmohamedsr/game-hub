@@ -4,7 +4,15 @@ import GameAttributes from "@/components/GameAttributes";
 import GameScreenShots from "@/components/GameScreenShots";
 import GameTrailer from "@/components/GameTrailer";
 import useGame from "@/hooks/useGame";
-import { Box, Button, Heading, Icon, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Button,
+	Grid,
+	GridItem,
+	Heading,
+	Icon,
+	Text,
+} from "@chakra-ui/react";
 import { IoArrowUndoOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -32,15 +40,22 @@ const GameDetailPage = () => {
 				</Text>
 			</Button>
 
-			<Box>
-				<Heading fontWeight={"bold"} fontSize={{ base: "ml", md: "xl" }} mb={4}>
-					{data.name}
-				</Heading>
-				<ExpandableText text={data.description_raw} limit={300} />
-				<GameAttributes game={data} />
-				<GameTrailer gameId={data.id} />
-				<GameScreenShots gameId={data.id} />
-			</Box>
+			<Grid gap={8} templateColumns={{ base: "1fr", md: "1fr 1fr" }}>
+				<GridItem>
+					<Heading
+						fontWeight={"bold"}
+						fontSize={{ base: "ml", md: "xl" }}
+						mb={4}>
+						{data.name}
+					</Heading>
+					<ExpandableText text={data.description_raw} limit={300} />
+					<GameAttributes game={data} />
+				</GridItem>
+				<GridItem>
+					<GameTrailer gameId={data.id} />
+					<GameScreenShots gameId={data.id} />
+				</GridItem>
+			</Grid>
 		</Box>
 	);
 };

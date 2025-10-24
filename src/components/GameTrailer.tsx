@@ -21,7 +21,7 @@ const GameTrailer = ({ gameId }: Iprops) => {
 			bg='gray.900'
 			_hover={{ boxShadow: "xl" }}
 			maxW='800px'
-			my={6}>
+			mb={2}>
 			<AspectRatio ratio={16 / 9}>
 				<video
 					src={firstTrailer?.data?.[480]}
