@@ -1,6 +1,7 @@
 import GameErrorState from "@/components/error";
 import ExpandableText from "@/components/ExpandableText";
 import GameAttributes from "@/components/GameAttributes";
+import GameScreenShots from "@/components/GameScreenShots";
 import GameTrailer from "@/components/GameTrailer";
 import useGame from "@/hooks/useGame";
 import { Box, Button, Heading, Icon, Text } from "@chakra-ui/react";
@@ -38,6 +39,7 @@ const GameDetailPage = () => {
 				<ExpandableText text={data.description_raw} limit={300} />
 				<GameAttributes game={data} />
 				<GameTrailer gameId={data.id} />
+				<GameScreenShots gameId={data.id} />
 			</Box>
 		</Box>
 	);

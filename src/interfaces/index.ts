@@ -55,3 +55,8 @@ export interface IGameTrailers {
 		max: string;
 	};
 }
+
+export interface IGameScreenshots {
+	id: number;
+	image: string;
+}
