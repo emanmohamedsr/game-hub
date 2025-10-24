@@ -23,14 +23,14 @@ export const getCroppedImageUrl = ({
 	);
 };
 
-interface IGetCroppedGameTitleProps {
-	title: string;
+interface IGetCroppedGameTextProps {
+	text: string;
 	length?: number;
 }
 
 export const getCroppedText = ({
-	title,
+	text,
 	length = 20,
-}: IGetCroppedGameTitleProps) => {
-	return title.length > length ? title.slice(0, length) + "..." : title;
+}: IGetCroppedGameTextProps) => {
+	return text.length > length ? text.slice(0, length) + "..." : text;
 };

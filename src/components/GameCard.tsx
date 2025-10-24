@@ -32,7 +32,7 @@ const GameCard = ({ game }: Iprops) => {
 				/>
 				<Card.Body gap='12px'>
 					<Card.Title fontSize={"sm"} fontWeight='bold' spaceY={1}>
-						{getCroppedText({ title: game.name })}
+						{getCroppedText({ text: game.name })}
 					</Card.Title>
 					<HStack justifyContent='space-between' alignItems='start'>
 						<GamePlatformList platforms={gamePlatforms} />
