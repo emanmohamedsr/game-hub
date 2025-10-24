@@ -11,8 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState, type FormEvent } from "react";
 import { LuSearch } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 const SearchDialog = () => {
+	const navigate = useNavigate();
 	const onSearch = useGameQueryStore((s) => s.setSearchText);
 	const [open, setOpen] = useState(false);
 	const { colorMode } = useColorMode();
@@ -23,6 +25,7 @@ const SearchDialog = () => {
 		if (ref.current) {
 			onSearch(ref.current.value || undefined);
 			setOpen(false);
+			navigate("/");
 		}
 	};
 

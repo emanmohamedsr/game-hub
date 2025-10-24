@@ -6,23 +6,18 @@ import { Link } from "react-router-dom";
 
 const NavBar = () => {
 	return (
-		<HStack
-			flexDirection={{ base: "row-reverse", lg: "row" }}
-			justifyContent={"space-between"}
-			px={4}
-			py={2}>
-			<HStack flexDirection={{ base: "row-reverse", lg: "row" }}>
+		<HStack justifyContent={"space-between"} px={4} py={2}>
+			<HStack>
 				<Link to={"/"}>
 					<Image
 						src={logo}
 						alt='logo'
+						objectFit={"cover"}
 						w={{ base: "30px", sm: "60px" }}
 						mr={{ base: -2, sm: 0 }}
 					/>
 				</Link>
-				{/* <Link to={"/"}> */}
 				<SearchDialog />
-				{/* </Link> */}
 			</HStack>
 			<ColorModeButton />
 		</HStack>
