@@ -4,7 +4,7 @@ import GameHubLayout from "@/pages/GameHubLayout";
 import RootLayout from "@/pages/Layout";
 import PageNotFound from "@/pages/NotFound";
 import { createBrowserRouter } from "react-router-dom";
-import GameDetailPage from "./GameDetail";
+import GameDetailPage from "../pages/GameDetail";
 
 const router = createBrowserRouter([
 	{

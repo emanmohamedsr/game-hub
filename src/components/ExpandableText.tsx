@@ -13,12 +13,12 @@ const ExpandableText = ({ text, limit = 300 }: Iprops) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ToggleIsExpanded = () => setIsExpanded((prev) => !prev);
 	return (
-		<HStack flexWrap={"wrap"} gap={2}>
+		<HStack fontSize={{ base: "sm", md: "lg" }} flexWrap={"wrap"} gap={2}>
 			<Text>
 				{isExpanded ? text : getCroppedText({ text: text, length: limit })}
 			</Text>
 			<Button
-				size={"xs"}
+				size={"sm"}
 				fontWeight={"bold"}
 				onClick={ToggleIsExpanded}
 				bg={

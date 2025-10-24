@@ -45,3 +45,13 @@ export interface IGameQuery {
 	sortVal?: string;
 	search?: string;
 }
+
+export interface IGameTrailers {
+	id: number;
+	name: string;
+	preview: string;
+	data: {
+		480: string;
+		max: string;
+	};
+}
