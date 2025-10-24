@@ -15,7 +15,7 @@ interface IPCProps {
 }
 const PCSider = ({ children }: IPCProps) => {
 	return (
-		<VStack w={"100%"} p={4} alignItems='flex-start' gap={4}>
+		<VStack w={"100%"} alignItems='flex-start' gap={4}>
 			{children}
 		</VStack>
 	);

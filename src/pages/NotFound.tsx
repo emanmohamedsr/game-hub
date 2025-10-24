@@ -7,7 +7,7 @@ const PageNotFound = () => {
 	return (
 		<Box
 			bgGradient='linear(to-br, purple.700, pink.500)'
-			minH='100vh'
+			h={{ base: "calc(100vh - 52px)", md: "calc(100vh - 76px)" }}
 			display='flex'
 			alignItems='center'
 			justifyContent='center'

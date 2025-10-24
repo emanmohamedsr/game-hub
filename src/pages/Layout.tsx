@@ -1,11 +1,14 @@
 import NavBar from "@/components/layout/NavBar";
+import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
 	return (
 		<>
 			<NavBar />
-			<Outlet />
+			<Box p={5}>
+				<Outlet />
+			</Box>
 		</>
 	);
 };

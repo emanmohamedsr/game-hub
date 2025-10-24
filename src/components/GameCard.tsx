@@ -16,7 +16,7 @@ const GameCard = ({ game }: Iprops) => {
 		game.parent_platforms?.map(({ platform }) => platform) ?? [];
 
 	return (
-		<Link to={`/games/${game.id}`}>
+		<Link to={`/games/${game.slug}`}>
 			<Card.Root
 				borderRadius={"md"}
 				overflow={"hidden"}

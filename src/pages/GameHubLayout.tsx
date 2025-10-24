@@ -10,7 +10,7 @@ const GameHubLayout = () => {
 				lg: `"aside main" "aside main"`,
 			}}
 			templateColumns={{ base: "1fr", lg: "200px 1fr" }}>
-			<GridItem area={"aside"} p={{ base: 2, sm: 3 }}>
+			<GridItem area={"aside"}>
 				<SiderBar />
 			</GridItem>
 			<GridItem area={"main"} px={6}>
