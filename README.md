@@ -1,11 +1,11 @@
-<div style="display:flex;align-items:center;padding-bottom:8px;gap:12px">
-   <img src="./src/assets/logo.webp" alt="logo" width="48" />
-   <span style="font-size:28px;font-weight:700">GameHub</span>
-</div>
+<h1>
+  <img src="./src/assets/logo.webp" alt="logo" width="48" valign="middle" />
+  <span>GameHub</span>
+</h1>
 
 Game Hub displays games, supports searching, filtering by platform/genre, and shows game details. The app uses React Query for data fetching and caching, Chakra UI for the design system, and axios for API requests.
 
-## [Live Demo](https://your-live-demo-url.example)
+## [Live Demo](https://game-hub-two-sandy.vercel.app/)
 
 ## Tech stack
 
